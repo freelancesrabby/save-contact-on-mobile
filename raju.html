@@ -1,0 +1,26 @@
+
+<button id="saveContactButton">Save Contact</button>
+
+<script>
+document.getElementById('saveContactButton').addEventListener('click', function() {
+    // Replace with the actual vCard content you want to save
+    var vCardData = "BEGIN:VCARD\nVERSION:3.0\nFN:John Doe\nTEL:1234567890\nEMAIL:john.doe@example.com\nEND:VCARD";
+
+    var blob = new Blob([vCardData], { type: 'text/vcard' });
+    var url = window.URL.createObjectURL(blob);
+
+    // Create a download link
+    var a = document.createElement('a');
+    a.style.display = 'none';
+    a.href = url;
+    a.download = 'contact.vcf';
+
+    // Trigger a click event on the link to initiate the download
+    document.body.appendChild(a);
+    a.click();
+
+    // Clean up
+    window.URL.revokeObjectURL(url);
+    document.body.removeChild(a);
+});
+</script>
